@@ -1,0 +1,10 @@
+{
+	"code":200,
+	"message":"ok",
+	"data":[
+		{"id":1,"is_default":1,"address_name":"","address_details":"江苏省 苏州市沧浪区东街花苑4栋302","realname":"林桂蓬","phone":13584474721},
+		{"id":2,"is_default":0,"address_name":"","address_details":"山东省 青岛市黄岛区奋进路500号瑞智精密有限公司","realname":"赵建勇","phone":18661776456}
+	   ]
+		
+	
+}

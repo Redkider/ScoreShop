@@ -1,0 +1,121 @@
+<template>
+	<view class="content">
+		<view class="text"></view>
+		 <view class="canvas">
+			<canvas canvas-id="qrcode" :style="{width: `${qrcodeSize}px`, height: `${qrcodeSize}px`}" />
+			<text>我的二维码</text>
+		</view> 
+		<!-- <view class="image">
+			<image :src="qrcodeSrc" />
+			<text>我的二维码</text>
+		</view>
+		<input class="input" v-model="qrcodeText" placeholder="输入内容生成二维码" />
+		<button class="button" type="primary" @tap="make()">生成二维码</button>
+		<button class="button" type="primary" @tap="toComponent()">自定义组件</button>
+		<button class="button" type="primary" @tap="toPoster()">二维码海报</button> -->
+	</view>
+</template>
+
+<script>
+	import uQRCode from '@/common/uqrcode.js'
+	export default {
+		data() {
+			return {
+				userInfo:{},
+				qrcodeText: '',
+				qrcodeSize: 200,
+				qrcodeSrc: ''
+			}
+		},
+		onLoad() {
+			this.userInfo=uni.getStorageSync('userInfo');
+			//this.qrcodeText="http://localhost:8080/public/register?id="+this.userInfo.id
+			this.qrcodeText="http://www.baidu.com"
+			this.make()
+		},
+		methods: {
+			make() {
+				uni.showLoading({
+					title: '二维码生成中',
+					mask: true
+				})
+				uQRCode.make({
+					canvasId: 'qrcode',
+					text: this.qrcodeText,
+					size: this.qrcodeSize,
+					margin: 10,
+					success: res => {
+						this.qrcodeSrc = res
+					},
+					complete: () => {
+						uni.hideLoading()
+					}
+				})
+			},
+			/* toComponent() {
+				uni.navigateTo({
+					url: '/pages/component/qrcode/qrcode'
+				})
+			},
+			toPoster() {
+				uni.navigateTo({
+					url: '/pages/poster/poster'
+				})
+			} */
+		}
+	}
+</script>
+
+<style>
+	page {
+		background-color: #f0f0f0;
+	}
+	.content {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin-top: var(--status-bar-height);
+	}
+	.text {
+		display: flex;
+		justify-content: center;
+		margin-top: 50rpx;
+		font-size: 36rpx;
+		color: #666666;
+	}
+	.canvas {
+		margin-top: 350rpx;
+		text-align: center;
+	}
+	.canvas canvas {
+		margin: 0 auto;
+	}
+	.image {
+		width: 258rpx;
+		margin-top: 50rpx;
+		text-align: center;
+	}
+	.image image {
+		display: block;
+		width: 258rpx;
+		height: 258rpx;
+	}
+	.input {
+		width: 600rpx;
+		height: 40px;
+		margin: 50rpx 0;
+		padding: 0 20rpx;
+		border: 1px solid #b0b0b0;
+		border-radius: 5px;
+		background-color: #ffffff;
+		box-sizing: border-box;
+	}
+	.button {
+		width: 690rpx;
+		margin: 10rpx;
+	}
+	.button:last-child {
+		margin-bottom: 50rpx;
+	}
+</style>

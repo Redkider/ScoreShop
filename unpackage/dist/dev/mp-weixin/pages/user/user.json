@@ -1,0 +1,11 @@
+{
+  "navigationBarTitleText": "我的",
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "rf-badge": "/components/rf-badge/rf-badge",
+    "uni-table": "/components/uni-table/uni-table",
+    "rf-loading": "/components/rf-loading/rf-loading",
+    "list-cell": "/components/mix-list-cell",
+    "rf-tab": "/components/rf-tab/rf-tab"
+  }
+}

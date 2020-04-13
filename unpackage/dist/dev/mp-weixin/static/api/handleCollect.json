@@ -1,0 +1,20 @@
+{
+	"code":200,
+	"message":"ok",
+	"data":[
+		{"id":"1","user":"15021133045","product_name":"【低聚木糖】家庭装（5+1）盒","productId":"65","number":1,"price":"3894","date":"1586403767.917","product_img":"/static/productImg/family.jpg",
+		 "favorite":true
+		
+		
+		},
+		{"id":"2","user":"15021133045","product_name":"【低聚木糖】特惠装（5+1）盒","productId":"63","number":1,"price":"1298","date":"1586403767.917","state":"未付款",
+		 "product_img":"/static/productImg/preferential.jpg", "favorite":true
+		  },
+		{"id":"3","user":"15021133045","product_name":"【低聚木糖】精品装（5+1）盒","productId":"64","number":1,"price":"2596","date":"1586403767.917","state":"未付款",
+		"product_img":"/static/productImg/highquality.jpg","favorite":true
+		},
+		{"id":"4","user":"15021133045","product_name":"【低聚木糖】尊贵装（5+1）盒","productId":"66","number":1,"price":"6490","date":"1586403767.917","state":"未付款",
+		"product_img":"/static/productImg/honorable.jpg","favorite":true
+		}
+	]
+}

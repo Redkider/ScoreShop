@@ -1,0 +1,1 @@
+<view class="content"><view class="text"></view><view class="canvas"><canvas style="{{'width:'+(qrcodeSize+'px')+';'+('height:'+(qrcodeSize+'px')+';')}}" canvas-id="qrcode"></canvas><text>我的二维码</text></view></view>

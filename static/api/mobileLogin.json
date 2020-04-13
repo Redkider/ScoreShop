@@ -1,0 +1,22 @@
+{
+	"code":200,
+	"message":"ok",
+	"data":[
+		{"id":"1","realname":"王二狗","nickname":"二狗","phone":15021133045,"headimgurl":"/static/useHeadImg/ergou.jpg",
+		"remainingSum":1100,"exchangeScore":120,"redEnvelope":6000,"password":"sd123456",
+		"address":"郑州市二七区","QRcode":"",
+		"team":{
+			"class1":[
+				{"name":"刘春花","score":0,"popularize":0,"phone":"15525970013","photo":"/static/useHeadImg/ergou.jpg"},
+				{"name":"李四喜","score":1,"popularize":5,"phone":"15525970013","photo":"/static/useHeadImg/ergou.jpg"}
+				]
+			,
+			"class2":[
+				{"name":"张三三","score":0,"popularize":0,"phone":"17525970013","photo":"/static/useHeadImg/ergou.jpg"},
+				{"name":"牛大宝","score":0,"popularize":0,"phone":"13125970013","photo":"/static/useHeadImg/ergou.jpg"}
+				]
+			
+		      }
+		}
+	]
+}
