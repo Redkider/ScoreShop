@@ -26,12 +26,13 @@
 				</view>
 				<text class="title clamp in2line" v-if="item.name">{{item.name}}</text>
 				<view class="last-line" v-if="item.name">
+					
 					<text class="price in1line">{{item.price}}
 					<text class="m-price" v-if="parseFloat(item.market_price) > parseFloat(item.price)">¥ {{ item.market_price }}</text>
 					</text>
 					<text class="sales in1line">
-						<text class="red">{{ item.sales }}</text>
-						付款
+						<text class="red">{{ item.sales | maxSales}}</text>
+						人已付款
 					</text>
 				</view>
 			</view>
@@ -46,6 +47,7 @@
      *@blog https://stavtop.club
      *@date 2020/01/08 11:28:39
      */
+	
     export default {
         name: 'rfFloorIndex',
         props: {
@@ -79,6 +81,14 @@
         data() {
             return {}
         },
+		filters: {
+			maxSales(val) {
+				if(val>=999){
+					val=999+'+';
+				}
+				return val;
+			}
+		},
         methods: {
             // 跳转详情页
             detail(id) {
@@ -103,6 +113,7 @@
 </script>
 
 <style scoped lang="scss">
+	
 	.rf-floor-index {
 		.banner {
 			width: 92%;
@@ -153,5 +164,15 @@
 				color: $font-color-light;
 			}
 		}
+	}
+	.price{
+		
+		font-weight: 600;
+		
+	}
+	
+	.title{
+		
+		
 	}
 </style>

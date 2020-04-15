@@ -103,8 +103,9 @@
 					<i class="iconfont iconmima no-foot-print-icon" />
 					登陆后查看
 				</view>
-				<list-cell icon="iconiconfontweixin" iconColor="#e07472" @eventClick="directTo('/pages/user/coupon-center')" title="去领券中心" tips="速来领取大额优惠券"></list-cell>
+				<list-cell icon="iconiconfontweixin" iconColor="#e07472" @eventClick="directTo('/pages/public/binding')" title="绑定支付宝银行卡" tips="立即绑定"></list-cell>
 				<list-cell icon="icondizhi" iconColor="#5fcda2" title="地址管理" @eventClick="navTo('/pages/address/address')" tips="管理你的收货地址"></list-cell>
+				
 				<list-cell icon="iconshoucang_xuanzhongzhuangtai" iconColor="#54b4ef" @eventClick="navTo('/pages/collection/collection')" title="我的收藏" tips="查看已收藏的宝贝"></list-cell>
 				<button class="share-btn" open-type="share" @tap="shareToH5">
 					<list-cell icon="iconshare" iconColor="#9789f7" title="分享" tips="将商城分享给你的好友">
@@ -165,16 +166,16 @@
 				footList: [],
 				user_info: {},
 				orderSectionList: [
-					{ title: '待付款', icon: 'iconfont icondaifukuan', url: '/pages/order/order?state=0' },
-					{ title: '待发货', icon: 'iconfont iconshouye', url: '/pages/order/order?state=1' },
-					{ title: '待收货', icon: 'iconfont iconyishouhuo', url: '/pages/order/order?state=2' },
-					{ title: '评价', icon: 'iconfont iconpingjia', url: '/pages/order/order?state=3' },
-					{ title: '售后', icon: 'iconfont iconshouhoutuikuan', url: '/pages/order/refund' },
+					{ title: '全部', icon: 'iconfont iconshouye', url: '/pages/order/order?state=0' },
+					{ title: '待收货', icon: 'iconfont icondaifukuan ', url: '/pages/order/order?state=1' },
+					{ title: '消费订单', icon: 'iconfont iconyishouhuo', url: '/pages/order/order?state=2' },
+					{ title: '兑换订单', icon: 'iconfont iconshouye', url: '/pages/order/order?state=3' },
+					{ title: '复购订单', icon: 'iconfont iconshouye', url: '/pages/order/order?state=4' },
 				],
 				amountList: [
 					{ title: '余额', value: 0, url: '/pages/user/account' },
-					{ title: '积分', value: 0, url: '/pages/user/coupon?type=1' },
-					{ title: '红包', value: 0, url: '/pages/user/integral' }
+					{ title: '红包', value: 0, url: '/pages/user/coupon?type=1' },
+					{ title: '积分', value: 0, url: '/pages/user/integral' }
 				],
 				loading: true,
 			}
@@ -234,7 +235,7 @@
 				//this.$api.msg('请复制连接进行分享');
 				
 				if(!this.token){
-									url = '/pages/public/logintype';
+									url = '/pages/public/login';
 									uni.showModal({
 				  content: '你暂未登陆，是否跳转登录页面？',
 				  success: (confirmRes)=> {
@@ -348,7 +349,7 @@
 					return;
 				}
 				if(!this.token){
-					url = '/pages/public/logintype';
+					url = '/pages/public/login';
 					uni.showModal({
             content: '你暂未登陆，是否跳转登录页面？',
             success: (confirmRes)=> {

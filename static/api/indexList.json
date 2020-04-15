@@ -29,38 +29,38 @@
 		 	  },
 		 "cate":[
 		 			
-		 		    {"id":"117","merchant_id":"1","title":"消费专区","cover":"/static/classicon/icon-consumer.png","sort":"0","level":"2","pid":"115","tree":"tr_0 tr_115 ","index_block_status":"1","status":"1","created_at":"1584281262","updated_at":"1585316296"},
-		 			{"id":"59","merchant_id":"1","title":"委托挂售","cover":"/static/classicon/icon-exchange.png","sort":"0","level":"2","pid":"43","tree":"tr_0 tr_43 ","index_block_status":"1","status":"1","created_at":"1575897170","updated_at":"1577170400"},
-		 			{"id":"66","merchant_id":"1","title":"兑换专区","cover":"/static/classicon/icon-merchants.png","sort":"1","level":"1","pid":"0","tree":"tr_0 ","index_block_status":"1","status":"1","created_at":"1575902301","updated_at":"1585316337"},
-		 			{"id":"44","merchant_id":"1","title":"线下兑换","cover":"/static/classicon/icon-offline.png","sort":"1","level":"1","pid":"0","tree":"tr_0 ","index_block_status":"1","status":"1","created_at":"1575895982","updated_at":"1584603554"},
-		 			{"id":"43","merchant_id":"1","title":"联惠商家","cover":"/static/classicon/icon-personal.png","sort":"1","level":"1","pid":"0","tree":"tr_0 ","index_block_status":"1","status":"1","created_at":"1575895971","updated_at":"1585745600"},
-					{"id":"42","merchant_id":"1","title":"商学院","cover":"/static/classicon/icon-school.png","sort":"1","level":"1","pid":"0","tree":"tr_0 ","index_block_status":"1","status":"1","created_at":"1575895960","updated_at":"1585432597"},
-		 			{"id":"115","merchant_id":"1","title":"增值消费","cover":"/static/classicon/icon-sell.png","sort":"2","level":"1","pid":"0","tree":"tr_0 ","index_block_status":"1","status":"1","created_at":"1584281177","updated_at":"1585432598"},
-					{"id":"116","merchant_id":"1","title":"个人中心","cover":"/static/classicon/icon-value.png","sort":"3","level":"2","pid":"115","tree":"tr_0 tr_115 ","index_block_status":"1","status":"1","created_at":"1584281241","updated_at":"1584501880"}
+		 		    {"id":"117","title":"委托挂售","cover":"/static/classicon/icon-consumer.png","url":"/pages/order/hangSell"},
+		 			{"id":"59","title":"消费专区","cover":"/static/classicon/icon-exchange.png","url":"/pages/category/category"},
+		 			{"id":"66","title":"兑换专区","cover":"/static/classicon/icon-merchants.png","url":"/pages/category/category"},
+		 			{"id":"44","title":"复购专区","cover":"/static/classicon/icon-offline.png","url":"/pages/category/category"},
+		 			{"id":"43","title":"联惠商家","cover":"/static/classicon/icon-personal.png","url":""},
+					{"id":"42","title":"商学院","cover":"/static/classicon/icon-school.png","url":""},
+		 			{"id":"115","title":"增值消费","cover":"/static/classicon/icon-sell.png","url":""},
+					{"id":"116","title":"线下兑换","cover":"/static/classicon/icon-value.png","url":""}
 		 		],
 		 "product_hot":[
-		 			{"id":"63","name":"【低聚木糖】特惠装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/preferential.jpg","view":"257","match_point":"5.00","price":"1298.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":1,"merchant_id":"1","merchant":null},
-					{"id":"64","name":"【低聚木糖】精品装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/highquality.jpg","view":"257","match_point":"5.00","price":"2596.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":1,"merchant_id":"1","merchant":null},
-					{"id":"65","name":"【低聚木糖】家庭装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/family.jpg","view":"257","match_point":"5.00","price":"3894.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":1,"merchant_id":"1","merchant":null},
-					{"id":"66","name":"【低聚木糖】尊贵装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/honorable.jpg","view":"257","match_point":"5.00","price":"6490.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":1,"merchant_id":"1","merchant":null}
+		 			{"id":"63","name":"【低聚木糖】特惠装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/preferential.jpg","view":"257","match_point":"5.00","price":"1298.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":123,"merchant_id":"1","merchant":null},
+					{"id":"64","name":"【低聚木糖】精品装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/highquality.jpg","view":"257","match_point":"5.00","price":"2596.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":441,"merchant_id":"1","merchant":null},
+					{"id":"65","name":"【低聚木糖】家庭装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/family.jpg","view":"257","match_point":"5.00","price":"3894.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":1111,"merchant_id":"1","merchant":null},
+					{"id":"66","name":"【低聚木糖】尊贵装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/honorable.jpg","view":"257","match_point":"5.00","price":"6490.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":321,"merchant_id":"1","merchant":null}
 		 			],
 		 "product_recommend":[
-		 			{"id":"63","name":"【低聚木糖】特惠装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/preferential.jpg","view":"257","match_point":"5.00","price":"1298.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":1,"merchant_id":"1","merchant":null},
-		 			{"id":"64","name":"【低聚木糖】精品装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/highquality.jpg","view":"257","match_point":"5.00","price":"2596.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":1,"merchant_id":"1","merchant":null},
-		 			{"id":"65","name":"【低聚木糖】家庭装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/family.jpg","view":"257","match_point":"5.00","price":"3894.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":1,"merchant_id":"1","merchant":null},
-		 			{"id":"66","name":"【低聚木糖】尊贵装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/honorable.jpg","view":"257","match_point":"5.00","price":"6490.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":1,"merchant_id":"1","merchant":null}
+		 			{"id":"63","name":"【低聚木糖】特惠装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/preferential.jpg","view":"257","match_point":"5.00","price":"1298.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":999,"merchant_id":"1","merchant":null},
+		 			{"id":"64","name":"【低聚木糖】精品装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/highquality.jpg","view":"257","match_point":"5.00","price":"2596.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":9990,"merchant_id":"1","merchant":null},
+		 			{"id":"65","name":"【低聚木糖】家庭装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/family.jpg","view":"257","match_point":"5.00","price":"3894.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":1231,"merchant_id":"1","merchant":null},
+		 			{"id":"66","name":"【低聚木糖】尊贵装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/honorable.jpg","view":"257","match_point":"5.00","price":"6490.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":3221,"merchant_id":"1","merchant":null}
 		 			],
 		 "product_new":[
-			 {"id":"63","name":"【低聚木糖】特惠装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/preferential.jpg","view":"257","match_point":"5.00","price":"1298.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":1,"merchant_id":"1","merchant":null},
-			 {"id":"64","name":"【低聚木糖】精品装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/highquality.jpg","view":"257","match_point":"5.00","price":"2596.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":1,"merchant_id":"1","merchant":null},
-			 {"id":"65","name":"【低聚木糖】家庭装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/family.jpg","view":"257","match_point":"5.00","price":"3894.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":1,"merchant_id":"1","merchant":null},
-			 {"id":"66","name":"【低聚木糖】尊贵装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/honorable.jpg","view":"257","match_point":"5.00","price":"6490.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":1,"merchant_id":"1","merchant":null}
+			 {"id":"63","name":"【低聚木糖】特惠装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/preferential.jpg","view":"257","match_point":"5.00","price":"1298.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":21,"merchant_id":"1","merchant":null},
+			 {"id":"64","name":"【低聚木糖】精品装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/highquality.jpg","view":"257","match_point":"5.00","price":"2596.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":51,"merchant_id":"1","merchant":null},
+			 {"id":"65","name":"【低聚木糖】家庭装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/family.jpg","view":"257","match_point":"5.00","price":"3894.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":6721,"merchant_id":"1","merchant":null},
+			 {"id":"66","name":"【低聚木糖】尊贵装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/honorable.jpg","view":"257","match_point":"5.00","price":"6490.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":331,"merchant_id":"1","merchant":null}
 		 		],
 		 "Repeat_Purchase":[
-			 {"id":"63","name":"【低聚木糖】特惠装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/preferential.jpg","view":"257","match_point":"5.00","price":"1298.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":1,"merchant_id":"1","merchant":null},
-			 {"id":"64","name":"【低聚木糖】精品装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/highquality.jpg","view":"257","match_point":"5.00","price":"2596.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":1,"merchant_id":"1","merchant":null},
-			 {"id":"65","name":"【低聚木糖】家庭装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/family.jpg","view":"257","match_point":"5.00","price":"3894.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":1,"merchant_id":"1","merchant":null},
-			 {"id":"66","name":"【低聚木糖】尊贵装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/honorable.jpg","view":"257","match_point":"5.00","price":"6490.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":1,"merchant_id":"1","merchant":null}
+			 {"id":"63","name":"【低聚木糖】特惠装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/preferential.jpg","view":"257","match_point":"5.00","price":"1298.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":111,"merchant_id":"1","merchant":null},
+			 {"id":"64","name":"【低聚木糖】精品装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/highquality.jpg","view":"257","match_point":"5.00","price":"2596.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":1231,"merchant_id":"1","merchant":null},
+			 {"id":"65","name":"【低聚木糖】家庭装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/family.jpg","view":"257","match_point":"5.00","price":"3894.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":121,"merchant_id":"1","merchant":null},
+			 {"id":"66","name":"【低聚木糖】尊贵装（1+5）盒","sketch":"","keywords":"","picture":"/static/productImg/honorable.jpg","view":"257","match_point":"5.00","price":"6490.00","market_price":"0.00","cost_price":"0.00","stock":"9999","sales":781,"merchant_id":"1","merchant":null}
 		 ],
 		 "config":{"web_site_icp":"","copyright_companyname":"","copyright_url":"","copyright_desc":""}
 	 } ,

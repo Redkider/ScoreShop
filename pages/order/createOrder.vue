@@ -3,10 +3,10 @@
 		<navigator url="/pages/address/address?source=1" class="address-section">
 			<view class="order-content">
 				<i class="iconfont iconshouhuodizhi"></i>
-				<view v-if="addressData" class="cen">
+				<view v-if="addressData.realname" class="cen">
 					<view class="top">
 						<text class="name">{{addressData.realname}}</text>
-						<text class="mobile">{{addressData.mobile}}</text>
+						<text class="mobile">{{addressData.phone}}</text>
 					</view>
 					<text class="address">{{ addressData.address_name }} {{addressData.address_details}}</text>
 				</view>
@@ -24,14 +24,26 @@
 				<text class="name">商品列表</text>
 			</view>
 			<!-- 商品列表 -->
-			<view class="g-item" v-for="(item, index) in orderDetail.products" :key="index" @tap="navTo(`/pages/product/product?id=${item.product_id}`)">
-				<rf-image :src="item.product_picture"></rf-image>
+		<!--	<view class="g-item" v-for="(item, index) in orderDetail.products" :key="index" @tap="navTo(`/pages/product/product?id=${item.product_id}`)">
+				<rf-image :src="item.picture"></rf-image>
 				<view class="right">
-					<text class="title clamp in2line">{{ item.product_name }}</text>
-					<text class="spec">{{ item.sku_name || '基础款' }}</text>
+					<text class="title clamp in2line">{{ item.name }}</text>
+					<text class="spec">{{ item.point_exchange_type | pointExchangeTypeFilter}}</text>
 					<view class="price-box">
-						<text class="price">￥ {{item.price}}</text>
-						<text class="number"> * {{ item.num }}</text>
+						<text class="price"> {{item.price}}</text>
+						<text class="number"> * {{ item.number }}</text>
+					</view>
+				</view>
+			</view> -->
+			<!-- 商品列表 -->
+			<view class="g-item"  @tap="navTo(`/pages/product/product?id=${orderDetail.products.id}`)">
+				<rf-image :src="orderDetail.products.picture"></rf-image>
+				<view class="right">
+					<text class="title clamp in2line">{{ orderDetail.products.name }}</text>
+					<text class="spec">{{ orderDetail.products.point_exchange_type | pointExchangeTypeFilter}}</text>
+					<view class="price-box">
+						<text class="price"> {{orderDetail.products.price}}</text>
+						<text class="number"> * {{ orderDetail.products.number }}</text>
 					</view>
 				</view>
 			</view>
@@ -59,7 +71,7 @@
 				</text>
 				<text class="cell-more wanjia wanjia-gengduo-d"></text>
 			</view>
-			<view class="yt-list-cell b-b" @tap="showCompanyPicker" v-show="parseInt(currentShippingType.value, 10) === 1">
+			<!-- <view class="yt-list-cell b-b" @tap="showCompanyPicker" v-show="parseInt(currentShippingType.value, 10) === 2">
 				<view class="cell-icon">
 					递
 				</view>
@@ -68,8 +80,8 @@
 					{{ currentCompany && currentCompany.label || '选择快递公司' }}
 				</text>
 				<text class="cell-more wanjia wanjia-gengduo-d"></text>
-			</view>
-			<view class="yt-list-cell b-b" @tap="showPickupPointPicker" v-show="parseInt(currentShippingType.value, 10) === 2">
+			</view> -->
+			<view class="yt-list-cell b-b" @tap="showPickupPointPicker" v-show="parseInt(currentShippingType.value, 10) === 1">
 				<view class="cell-icon">
 					提
 				</view>
@@ -79,18 +91,18 @@
 				</text>
 				<text class="cell-more wanjia wanjia-gengduo-d"></text>
 			</view>
-			<!--<view class="yt-list-cell b-b">-->
-				<!--<view class="cell-icon hb">-->
-					<!--减-->
-				<!--</view>-->
-				<!--<text class="cell-tit clamp">商家促销</text>-->
-				<!--<text class="cell-tip disabled">暂无可用优惠</text>-->
-			<!--</view>-->
-			<view class="yt-list-cell b-b" v-if="pointExchangeType[0] == 2 || pointExchangeType[0] == 4">
+			<!-- <view class="yt-list-cell b-b">
+				<view class="cell-icon hb">
+					减
+				</view>
+				<text class="cell-tit clamp">商家促销</text>
+				<text class="cell-tip disabled">暂无可用优惠</text>
+			</view> -->
+			<view class="yt-list-cell b-b" v-if="pointExchangeType[0] == 0 || pointExchangeType[0] == 1">
 				<view class="cell-icon hb">
 					分
 				</view>
-				<text class="cell-tit clamp">需要使用 {{ orderDetail.preview && orderDetail.preview.point || 0 }} 积分</text>
+				<text class="cell-tit clamp">需要使用 {{  orderDetail.preview.point || 0 }} 红包</text>
 				<text class="cell-tip disabled"></text>
 				<view class="cell-tip red">
 						<label class="radio">
@@ -98,45 +110,45 @@
 						</label>
 				</view>
 			</view>
-			<view class="yt-list-cell b-b" v-else v-show="parseInt(pointConfig.is_open) === 1">
+			<view class="yt-list-cell b-b" v-else v-show="orderDetail.point_config==1">
 				<view class="cell-icon hb">
 					减
 				</view>
-				<text class="cell-tit clamp">可用{{ maxUsePoint }}积分抵用{{ maxUsePointFee }}元</text>
+				<text class="cell-tit clamp">可用{{ maxUsePoint }}红包抵用{{ maxUsePointFee }}</text>
 				<text class="cell-tip disabled"></text>
 				<view class="cell-tip red">
 						<label class="radio">
 							<radio siza="mini" color="#fa436a" @tap="handleIsUsePoint" :disabled="isUsePointDisabled" :checked="isUsePoint" />
 						</label>
 				</view>
-			</view>
+			</view> 
 		</view>
 		<!-- 金额明细 -->
 		<view class="yt-list">
 			<view class="yt-list-cell b-b">
 				<text class="cell-tit clamp">商品金额</text>
-				<text class="cell-tip red">￥{{ amountGoods }}</text>
+				<text class="cell-tip red price">{{ amountGoods }}</text>
 			</view>
 			<view class="yt-list-cell b-b">
 				<text class="cell-tit clamp">优惠金额</text>
-				<text class="cell-tip red">-￥ {{ discountAmount }}</text>
+				<text class="cell-tip red price"> {{ discountAmount }}</text>
 			</view>
 			<view class="yt-list-cell b-b">
 				<text class="cell-tit clamp">运费</text>
 				<text class="cell-tip red">
-					<text>￥ {{ shippingMoney }}</text>
+					<text class="price"> {{ shippingMoney }}</text>
 				</text>
 			</view>
-			<view class="yt-list-cell b-b">
+			<!-- <view class="yt-list-cell b-b">
 				<text class="cell-tit clamp">发票税费</text>
 				<text class="cell-tip red">
 					<text>￥ {{ invoiceAmount }}</text>
 				</text>
-			</view>
+			</view> -->
 			<view class="yt-list-cell b-b">
 				<text class="cell-tit clamp">赠送积分</text>
 				<text class="cell-tip">
-					<text>{{ orderDetail.preview && orderDetail.preview.give_point }} 积分</text>
+					<text>{{ givePoint }} 积分</text>
 				</text>
 			</view>
 			<navigator url="/pages/invoice/invoice?source=1">
@@ -159,27 +171,43 @@
 					</view>
 				</view>
 			</navigator>
-			<view class="yt-list-cell desc-cell">
+			<!-- <view class="yt-list-cell desc-cell">
 				<text class="cell-tit clamp">备注</text>
 				<input class="desc" type="text" v-model="desc" placeholder="请填写备注信息" placeholder-class="placeholder" />
-			</view>
+			</view> -->
 		</view>
 
 		<!-- 底部 -->
-		<view class="footer">
+		<view class="footer" v-show="orderDetail.products.point_exchange_type==0">
 			<view class="price-content in1line">
-				<text>实付款</text>
-				<text class="price-tip">￥</text>
-				<text class="price">{{ `${realAmount} ${ maxUsePoint > 0 && (isUsePoint ? ` + ${maxUsePoint} 积分` : '') || (orderDetail.preview && orderDetail.preview.point ? ` + ${orderDetail.preview && orderDetail.preview.point} 积分` : '') }` }}</text>
+				<text>实付</text>
+			<!--	<text class="price-tip">￥</text>-->
+				
+				<text class="price">{{ `${realAmount} ${ maxUsePoint > 0 && (isUsePoint ? ` + ${maxUsePoint} 红包` : '')  }` }}</text>
 			</view>
 <!--			orderDetail.preview.point-->
-			<text class="submit" @tap="submit" v-if="orderDetail.preview && (userInfo.account.user_integral >= orderDetail.preview.point)">
-				提交订单
+			<text class="submit" @tap="submit" v-if="userInfo.remainingSum >= realAmount ">
+				立即支付
 			</text>
-			<text class="submit disabled" v-else>
-				积分不足
+			<text class="submit " v-else @tap="remainInsufficient">
+				余额不足
 			</text>
 		</view>
+		<!-- 底部 -->
+				<view class="footer" v-show="orderDetail.products.point_exchange_type==1">
+					<view class="price-content in1line">
+						<text>实付</text>
+						<text class="price-tip"></text>
+						<text class="price">{{ `${realAmount}`  }}</text>
+					</view>
+		<!--			orderDetail.preview.point-->
+					<text class="submit" @tap="submit" v-if=" userInfo.exchangeScore>= realAmount">
+						立即兑换
+					</text>
+					<text class="submit " v-else @tap="scoreInsufficient">
+						积分不足
+					</text>
+				</view>
 
 		<!-- 优惠券面板 -->
 		<view class="mask" :class="maskState===0 ? 'none' : maskState===1 ? 'show' : ''" @tap="toggleMask">
@@ -253,12 +281,51 @@
 				maskState: 0, //优惠券面板显示状态
 				desc: '', //备注
 				payType: 1, //1微信 2支付宝
-				orderDetail: {},
+				orderDetail: {
+					   "point_config":1,
+						
+						"is_logistics":1,
+						"max_use_point":1298,
+						
+						"company":[],
+						"pickup_point_config":{
+							"buyer_self_lifting":1,
+							"list":[
+								{"lable":""}
+							]
+						},
+						"products":{
+							"id":63,
+							"name":"【低聚木糖】特惠装（1+5）盒",
+							"point_exchange_type":0,
+							"price":"1298.00",
+							"number":1,
+							"picture":"/static/productImg/preferential.jpg",
+							"give_point":81
+						},
+						"preview":{
+							"shipping_money":0,
+							
+							
+							
+							"point":100
+						},
+						"invoice":[
+							
+						],
+						"coupons":[
+							/* {"title":"","start_time":"","start_time":"","couponType":{
+								"type":""
+							},"money":200,"discount":100,"at_least":1000,"range_type":1,"max_fetch":1,"term_of_validity_type":1
+							} */
+						]
+					
+				},
 				pointExchangeType: [],
 				loadingType: 'more', //加载更多状态
 				pickerShippingType: [
-					{ label: '物流配送', value: 1 },
-					{ label: '买家自提', value: 2 }
+					
+					{ label: '买家自提', value: 1 }
 				],
 				currentShippingType: {},
 				currentCompany: {},
@@ -267,7 +334,7 @@
 				invoiceItem: {},
 				addressData: {},
 				couponItem: {},
-				pointConfig: {},
+				pointConfig:'',
 				product: null,
 				shippingMoney: 0,
 				isUsePoint: false,
@@ -278,12 +345,22 @@
 				invoiceContent: null,
 			}
 		},
+		
 		computed: {
+			givePoint(){
+				let point = 0;
+				/* this.orderDetail.products && this.orderDetail.products.forEach(item => {
+					point += parseInt(item.number, 10) * parseFloat(item.give_point)
+				}); */
+				point += parseInt(this.orderDetail.products.number, 10) * parseFloat(this.orderDetail.products.give_point)
+				return this.floor(point);
+			},
 			amountGoods(){
 				let amount = 0;
-				this.orderDetail.products && this.orderDetail.products.forEach(item => {
-					amount += parseInt(item.num, 10) * parseFloat(item.price)
-				});
+				/* this.orderDetail.products && this.orderDetail.products.forEach(item => {
+					amount += parseInt(item.number, 10) * parseFloat(item.price)
+				}); */
+				amount += parseInt(this.orderDetail.products.number, 10) * parseFloat(this.orderDetail.products.price)
 				return this.floor(amount);
 			},
 			discountAmount() {
@@ -299,19 +376,24 @@
 				  return this.invoiceItem.type ? this.floor(this.orderDetail.invoice.order_invoice_tax / 100 * realAmount) : 0;
 		  },
 			maxUsePoint() {
-				return this.orderDetail.max_use_point > uni.getStorageSync('userInfo').account.user_integral
-						? uni.getStorageSync('userInfo').account.user_integral : this.orderDetail.max_use_point;
+				return this.orderDetail.max_use_point > uni.getStorageSync('userInfo').remainingSum
+						? uni.getStorageSync('userInfo').remainingSum : this.orderDetail.max_use_point;
 			},
 			maxUsePointFee() {
-				return this.maxUsePoint * this.pointConfig.convert_rate;
+				return this.maxUsePoint * 1;
 			}
 		},
 		filters: {
 			time(val) {
 				return moment(val * 1000).format('YY/MM/DD HH:mm')
-			}
+			},
+			pointExchangeTypeFilter(val) {
+				const type = [ '直接购买商品', '积分兑换商品'];
+				return type[parseInt(val, 10)];
+			},
 		},
 		onShow() {
+			console.log("createOrder:"+getApp().globalData.data)
 			if (this.addressData && this.addressData.realname) {
 				this.getOrderFreightFee();
 			}
@@ -320,6 +402,41 @@
 			this.initData(options);
 		},
 		methods: {
+			//余额不足按钮
+		remainInsufficient (){
+			
+			uni.showModal({
+			    content: '余额不足，是否去充值',
+			    success: (e) => {
+			        if (e.confirm) {
+			           uni.navigateTo({
+			           	url: "/pages/user/recharge",
+			           })
+			            }else{
+							this.$api.msg("余额不足暂时不能购买，建议立即充值！")
+						}
+						},
+						})
+			        }
+			    
+			
+			,
+		scoreInsufficient(){
+				
+			uni.showModal({
+			    content: '积分不足，去赚积分',
+			    success: (e) => {
+			        if (e.confirm) {
+			           uni.navigateTo({
+			           	url: "/pages/category/category",
+			           })
+			            }else{
+						this.$api.msg("积分不足不能兑换！")
+						}
+						},
+						})
+			
+		},
 	    handleInvoiceChange (val) {
         this.invoiceContent = val;
 	    },
@@ -361,9 +478,9 @@
 			 *@blog https://stavtop.club
 			 *@date 2019/11/29 17:28:22
 			 */
-			showCompanyPicker() {
+			/* showCompanyPicker() {
 				this.$refs.companyTypePicker.show()
-			},
+			}, */
 			showPickupPointPicker() {
 				this.$refs.pickupPointPicker.show()
 			},
@@ -430,28 +547,31 @@
 			 */
 			async initData(options) {
 				this.data = await JSON.parse(options.data);
+				console.log(this.data);
     			this.userInfo = uni.getStorageSync('userInfo');
-				await this.getOrderDetail(this.data);
+				//await this.getOrderDetail(this.data);
 				// this.getOrderFreightFee();
+				console.log(this.addressData)
 			},
 			async getOrderDetail(data) {
 				
-				await this.$get(`${orderPreview}`, {
+				await this.$get('http://localhost:8080/static/api/orderPreview.json', {
 					...data
 				}).then(r => {
 					this.orderDetail = r.data;
+					console.log("1"+this.orderDetail)
 					this.pointConfig = this.orderDetail.point_config
 					this.addressData = this.orderDetail.address;
-					this.currentShippingType = this.pickerShippingType[0]
+					this.currentShippingType = this.pickerShippingType[1]
 					this.orderDetail.company.forEach(item => {
 						item.label = item.title;
 						item.value = item.id;
 					});
 					this.currentCompany = this.orderDetail.company[0];
 					this.pointExchangeType = [];
-					this.orderDetail.products.forEach(item => {
+					/* this.orderDetail.products.forEach(item => {
 						this.pointExchangeType.push(item.point_exchange_type)
-					});
+					}); */
 					if (parseInt(this.orderDetail.pickup_point_config.buyer_self_lifting, 10) === 1) {
 						this.orderDetail.pickup_point_config.list.forEach(item => {
 							item.label = `${item.contact || '无名'} - ${item.name || '未知'} - ${item.address || '未知'}`;
@@ -551,6 +671,8 @@
 </script>
 
 <style lang="scss">
+	
+	
 	page {
 		background: $page-color-base;
 		padding-bottom: 100upx;
@@ -678,7 +800,18 @@
 				color: $font-color-dark;
 				.price {
 					margin-bottom: 4upx;
+					font: normal normal normal 14px/1 FontAwesome;
+					&:before {
+						
+					  
+					  
+					 font-size: 22upx;
+					  content: '\f1c0';
+					  padding: 4upx;
+					 
+					} 
 				}
+				
 				.number{
 					font-size: 26upx;
 					color: $font-color-base;
@@ -848,7 +981,7 @@
 			margin-left: 8upx;
 		}
 		.price{
-			font-size: $font-lg;
+			//font-size: $font-lg;
 			color: $base-color;
 		}
 		.submit{

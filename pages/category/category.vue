@@ -32,6 +32,15 @@
               <view class="box" v-for="(p,i) in o.child" :key="i" @tap.stop="navToDetailPage(p.id)">
                 <image :src="p.cover"></image>
                 <view class="text">{{p.title}}</view>
+				<view class="product">
+					
+					<text class="price in1line">{{p.price}}</text>
+					
+					<text class="sales in1line">
+							<text class="red">已售:{{ p.sales | maxSales}}</text>
+					</text>
+					
+				</view>
               </view>
             </view>
             <view v-else class="no-data">
@@ -86,6 +95,14 @@
 		onShow() {
 			console.log("category_onShow")
 			this.initData();
+		},
+		filters: {
+			maxSales(val) {
+				if(val>=999){
+					val=999+'+';
+				}
+				return val;
+			}
 		},
 		methods: {
 			//跳转至商品列表
@@ -238,7 +255,7 @@
           .text {
             width: 100%;
             position: relative;
-            font-size: 28upx;
+            font-size: 22upx;
             display: flex;
             justify-content: center;
             color: #3c3c3c;
@@ -313,10 +330,10 @@
 
               .text {
                 margin-top: 8upx;
-                width: 100%;
+                width: 84%;
                 display: flex;
                 justify-content: center;
-                font-size: 26upx;
+                font-size: 22upx;
               }
             }
           }
@@ -337,4 +354,32 @@
       }
     }
   }
+ 
+  .product{
+	  display: flex;
+	  justify-content: space-between;
+	  font-size: 22upx;
+	  width: 84%;
+	  padding: 0 4upx;
+	  .price {
+	    
+	    color: red;
+	    line-height: 1;
+	   
+		font-size: 22upx;
+		padding-top: 8upx;
+	   
+	  
+	    .m-price {
+	      margin-left: 4upx;
+	      color: red;
+	      font-size: 22upx;
+	      text-decoration: line-through;
+	    }
+	  	}
+		.red{
+			color: red;
+		}
+  }
+  
 </style>

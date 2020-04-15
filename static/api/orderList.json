@@ -1,0 +1,39 @@
+{
+	"code":200,
+	"message":"ok",
+	"data":[
+		{"order_code":"1111110000","create_time":"1586854505.341","pay_time":"",
+		"take_time":[
+			
+		],
+		"get_integral":10,"count":1,"pay":"1298.00","take_number":6,
+		"goods":[
+			{"name":"【低聚木糖】特惠装（1+5）盒","price":"1298.00","number":1,"id":63,"picture":"/static/productImg/family.jpg","sku_name":"直接购买商品"}
+		],
+		"order_type":1,"order_status":1,"consignee":"王二狗","phone":"15824879343","address":""
+		},
+		{"order_code":"1111110002","create_time":"1586854505.341","pay_time":"",
+		  "take_time":[
+			
+		   ],
+		   "get_integral":0,"count":1,"pay":"100", "take_number":6,
+		   "goods":[
+			   {"name":"【低聚木糖】特惠装（1+5）盒","price":"100","number":1,"id":63,"picture":"/static/productImg/family.jpg","sku_name":"积分兑换商品"}
+		     ],
+		
+		     "order_type":2,"order_status":2,"consignee":"王二狗","phone":"15824879343","address":""
+		  },
+		  {"order_code":"1111110012","create_time":"1586854505.341","pay_time":"",
+		    "take_time":[
+		  	
+		     ],
+		     "get_integral":0,"count":1,"pay":"100","take_number":6,
+		     "goods":[
+		  	   {"name":"【低聚木糖】特惠装（1+5）盒","price":"100","number":1,"id":63,"picture":"/static/productImg/family.jpg","sku_name":"积分兑换商品"}
+		       ],
+		  
+		       "order_type":2,"order_status":2,"consignee":"王二狗","phone":"15824879343","address":""
+		    }
+		
+	]
+}

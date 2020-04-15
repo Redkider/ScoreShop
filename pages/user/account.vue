@@ -4,24 +4,24 @@
     <view class="header">
       <view class="account">
         <view class="assets">
-          <view>总资产(元)</view>
+          <view>资产余额</view>
           <view class="money">
-							{{ userInfo && userInfo.account && userInfo.account.user_money || '0.00' }}
+							{{ userInfo.remainingSum || '0.00' }}
           </view>
         </view>
         <text @tap="navTo('/pages/user/recharge')" class="recharge" >充值</text>
       </view>
       <view class="cumulative">
         <view class="item">
-          <view>累计充值(元)</view>
+          <view>累计充值</view>
           <view class="money">
-							{{ userInfo && userInfo.account && userInfo.account.accumulate_money || '0.00' }}
+							{{  userInfo.generalAssets || '0.00' }}
           </view>
         </view>
         <view class="item">
-          <view>累计消费(元)</view>
+          <view>累计消费</view>
           <view class="money">
-							{{ -(userInfo && userInfo.account && userInfo.account.consume_money) || '0.00' }}
+							{{ userInfo.consume || '0.00' }}
           </view>
         </view>
       </view>

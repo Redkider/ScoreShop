@@ -3,8 +3,12 @@
 	"message":"ok",
 	"data":
 		{"id":"1","realname":"王二狗","nickname":"二狗","phone":15021133045,"headimgurl":"/static/useHeadImg/ergou.jpg",
-		"remainingSum":1100,"exchangeScore":120,"redEnvelope":6000,"password":"sd123456",
-		"address":"郑州市二七区","QRcode":"", "alipay":15224879323,"unionpay":6222021001116245702,"unionpayname":"中国工商银行","unionpayaddress":"徐汇常熟路支行",
+		"remainingSum":1100,"generalAssets":1100,"consume":0,
+		"exchangeScore":120,"aggregateScore":10000,"freezingScore":200,"consumptionScore":680,
+		"redEnvelope":6000," deposit_redEnvelope":0,"consume_redEnvelope":0,
+		"password":"sd123456",
+		"address":"郑州市二七区","QRcode":"", "alipay":"","unionpay":"","unionpayname":"中国工商银行","unionpayaddress":"徐汇常熟路支行",
+		
 		"team":{
 			"class1":[
 				{"name":"刘春花","score":0,"popularize":0,"phone":"15525970013","photo":"/static/useHeadImg/ergou.jpg"},

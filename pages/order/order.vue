@@ -27,11 +27,11 @@
 						class="order-item"
 					>
 						<view class="i-top b-b">
-							<text class="time in1line">订单号：{{item.order_sn}}</text>
+							<text class="time in1line">订单号：{{item.order_code}}</text>
 							<!--<text class="time">{{item.created_at | time}}</text>-->
 							<text class="state" v-if="parseInt(item.order_status, 10) !== 0">{{item.order_status | orderStatusFilter }}</text>
 							<view class="example-body" v-else>
-								<rf-count-down :show-day="false" :second="second(item.created_at)" @timeup="timeUp(item)" color="#FFFFFF" background-color="#fa436a" border-color="#fa436a" />
+								<rf-count-down :show-day="false" :second="second(item.create_time)" @timeup="timeUp(item)" color="#FFFFFF" background-color="#fa436a" border-color="#fa436a" />
 							</view>
 						</view>
 
@@ -50,41 +50,41 @@
 <!--							v-if="item.product && item.product.length === 1"-->
 						<view
 							class="goods-box-single"
-              @tap.stop="navTo(`/pages/product/product?id=${goodsItem.product_id}`)"
-							v-for="(goodsItem, goodsIndex) in item.product" :key="goodsIndex"
+              @tap.stop="navTo(`/pages/product/product?id=${goodsItem.id}`)"
+							v-for="(goodsItem, goodsIndex) in item.goods" :key="goodsIndex"
 						>
-							<image class="goods-img" :src="goodsItem.product_picture" mode="aspectFill"></image>
+							<image class="goods-img" :src="goodsItem.picture" mode="aspectFill"></image>
 							<view class="right">
-								<text class="title in2line">{{goodsItem.product_name}}</text>
-								<text class="attr-box">{{goodsItem.sku_name || '基础版'}}</text>
-								<text v-if="goodsItem.point_exchange_type == 2 ||goodsItem.point_exchange_type == 4">
-									<text class="point">{{item.point}}积分 </text>
-									* {{goodsItem.num}}
+								<text class="title in2line">{{goodsItem.name}}</text>
+								<text class="attr-box">{{goodsItem.sku_name || '无'}}</text>
+								<text v-if="goodsItem.type == 2">
+									<text class="point">{{goodsItem.price}}积分 </text>
+									* {{goodsItem.number}}
 								</text>
-								<text class="price" v-else>
-									<text class="red">{{goodsItem.product_money}} <text v-if="goodsItem.gift_flag === 0"> + {{ (item.point + '积分') || '' }}</text></text>
-									* {{goodsItem.num}}
+								<text class="" v-else>
+									<text class="red">{{goodsItem.price}} </text>
+									* {{goodsItem.number}}
 								</text>
 							</view>
 						</view>
 
 						<view class="price-box">
 							共
-							<text class="num">{{ item.product_count }}</text>
+							<text class="num">{{ item.count }}</text>
 							件商品 实付款
-							<text class="price">{{ item.pay_money }}</text>
+							<text class="price">{{ item.pay }}</text>
 						</view>
 						<view class="action-box b-t">
-							<button class="action-btn" v-if="item.order_status == 0" @tap="handleOrderOperation(item, 'close')">取消订单</button>
+							<!-- <button class="action-btn" v-if="item.order_status == 1" @tap="handleOrderOperation(item, 'close')">取消订单</button> -->
               <button class="action-btn" @tap="handleOrderOperation(item, 'detail')">订单详情</button>
-							<button class="action-btn recom" v-if="item.order_status == 0" @tap="handlePayment(item)">立即支付</button>
-						  <button class="action-btn recom" v-if="item.order_status == 1" @tap="handleOrderOperation(item, 'refund', 1)">申请退款</button>
-						  <button class="action-btn" v-if="item.order_status == 4 || item.order_status == 2" @tap="handleOrderOperation(item, 'shipping')">查看物流</button>
+							<!-- <button class="action-btn recom" v-if="item.order_status == 1" @tap="handlePayment(item)">立即支付</button>
+						  <button class="action-btn recom" v-if="item.order_status == 4" @tap="handleOrderOperation(item, 'refund', 1)">申请退款</button>
+						  <button class="action-btn" v-if="item.order_status == 4 || item.order_status == 12" @tap="handleOrderOperation(item, 'shipping')">查看物流</button>
               <button class="action-btn recom" v-if="item.order_status == 4" @tap="handleOrderOperation(item, 'refund', 3)">订单售后</button>
-							<button class="action-btn recom" v-if="item.order_status == 2" @tap="handleOrderOperation(item, 'refund', 2)">申请退货</button>
-              <button class="action-btn recom" v-if="item.order_status == 2 && item.is_customer != 0" @tap="handleOrderOperation(item, 'delivery')">确认收货</button>
-						  <button class="action-btn recom" v-if="item.order_status == 4" @tap="handleOrderOperation(item, 'evaluation')">我要评价</button>
-						  <button class="action-btn recom" v-if="item.order_status == -4" @tap="handleOrderOperation(item, 'delete')">删除订单</button>
+							<button class="action-btn recom" v-if="item.order_status == 4" @tap="handleOrderOperation(item, 'refund', 2)">申请退货</button> -->
+              <button class="action-btn recom" v-if="item.order_status == 1 && item.is_customer != 0" @tap="handleOrderOperation(item, 'delivery')">确认收货*{{item.take_number}}</button>
+						  <!-- <button class="action-btn recom" v-if="item.order_status == 4" @tap="handleOrderOperation(item, 'evaluation')">我要评价</button>
+						  <button class="action-btn recom" v-if="item.order_status == -4" @tap="handleOrderOperation(item, 'delete')">删除订单</button> -->
             </view>
 					</view>
 					<rf-load-more :status="loadingType" v-if="orderList.length > 0"></rf-load-more>
@@ -122,36 +122,38 @@
 				loadingType: 'more',
 				navList: [
 					{
-						state: undefined,
+						state: 0,
 						text: '全部'
 					},
 					{
-						state: 0,
-						text: '待付款'
-					},
-					{
 						state: 1,
-						text: '待发货'
-					},
-					{
-						state: 2,
 						text: '待收货'
 					},
 					{
+						state: 2,
+						text: '消费订单'
+					},
+					{
 						state: 3,
-						text: '评价'
+						text: '兑换订单'
+					},
+					{
+						state: 4,
+						text: '复购订单'
 					}
 				],
 				orderList: [],
 				page: 1,
 				loading: true,
+				userInfo:{},
+				token:''
 			};
 		},
 		computed: {
 			// 计算倒计时时间
 			second() {
 				return function (val) {
-					return Math.floor(15 * 60 - (new Date() / 1000 - val))
+					return Math.floor(5 * 24 * 60 * 60 - (new Date() / 1000 - val))
 				}
 			}
 		},
@@ -164,16 +166,11 @@
       orderStatusFilter (orderStatus) {
 			  let status = null;
 				const orderStatusList = [
-					{key: 0, value: '待付款'},
-					{key: 1, value: '待发货'},
-					{key: 2, value: '已发货'},
-					{key: 3, value: '已收货'},
-					{key: 4, value: '待评价'},
-					{key: -1, value: '退货申请'},
-					{key: -2, value: '退款中'},
-					{key: -3, value: '退款完成'},
-					{key: -4, value: '已关闭'},
-					{key: -5, value: '撤销申请'},
+					
+					{key: 1, value: '待收货'},
+					{key: 2, value: '已收货'},
+					
+				
 				];
 				orderStatusList.forEach(orderItem => {
 					if (orderItem.key == orderStatus) {
@@ -195,7 +192,7 @@
 			 * 修复app端点击除全部订单外的按钮进入时不加载数据的问题
 			 * 替换onLoad下代码即可
 			 */
-			this.tabCurrentIndex = +options.state + 1;
+			this.tabCurrentIndex = +options.state;
 			// this.initData()
 		},
 		//下拉刷新
@@ -207,7 +204,7 @@
 		//加载更多
 		onReachBottom(){
 			this.page ++;
-			this.getOrderList();
+			//this.getOrderList();
 		},
 		methods: {
 			// 倒计时关闭订单
@@ -296,6 +293,7 @@
           this.page = 1;
           this.orderList.length = 0;
 					this.getOrderList();
+					this.$api.msg('还能领取'+1+'次');
 				}).catch(() => {
 		      this.loading = false;
 				})
@@ -308,18 +306,37 @@
 			},
 			// 数据初始化
 			initData () {
-				this.getOrderList();
+				console.log(new Date() / 1000)
+				this.userInfo=uni.getStorageSync('userInfo')
+				this.token=this.userInfo.id
+				if(this.token){
+					this.getOrderList();
+				}else{
+					uni.navigateTo({
+						url: "/pages/public/login",
+					})
+				}
+				
 			},
 			// 获取订单列表
 			async getOrderList(type) {
 				let index = this.tabCurrentIndex;
 				let navItem = this.navList[index];
 				const params = {};
-				if (navItem.state || navItem.state === 0) {
-					params.synthesize_status = navItem.state;
+				if ( navItem.state<3) {
+					params.status = navItem.state;
+				} else if(navItem.state==3){
+					params.type=1
+				}else if(navItem.state==4){
+					params.type=2
+				}else{
+					
 				}
+					
+				
 				params.page = this.page;
-				await this.$get(`${orderList}`, {
+				console.dir(params)
+				await this.$get('http://localhost:8080/static/api/orderList.json', {
 					...params
 				}).then(r => {
 					this.loading = false;
@@ -327,7 +344,11 @@
 						uni.stopPullDownRefresh();
 					}
 					this.loadingType  = r.data.length === 10 ? 'more' : 'nomore';
-					this.orderList = [ ...this.orderList, ...r.data ]
+					
+					this.orderList=r.data
+					
+					//this.orderList = [ ...this.orderList, ...r.data ]
+					console.log(this.orderList)
 				}).catch(() => {
 					this.loading = false;
 					if (type === 'refresh') {
@@ -349,6 +370,7 @@
 				this.orderList.length = 0;
 				this.loading = true;
 				this.tabCurrentIndex = index;
+				console.log("点击头部tab:"+this.tabCurrentIndex)
 			},
 			//顶部tab点击
 			getMoreOrderList(){
@@ -433,12 +455,14 @@
 				}
 			}
 		}
+		
 		/* 单条商品 */
 		.goods-box-single{
 			display: flex;
 			margin: 10upx 0;
 			border-bottom: 1px solid rgba(0, 0, 0, .05);
 			box-shadow: 0 1px 5px rgba(0, 0, 0, .02);
+			 font: normal normal normal 14px/1 FontAwesome;
 			.goods-img{
 				display: block;
 				width: 180upx;
@@ -449,7 +473,7 @@
 				margin: 0 10upx 0 0;
 				font-size: $font-sm;
 				&:before{
-					content: '￥';
+					content: '\f1c0';
 					font-size: $font-sm + 2upx;
 					margin: 0 0 0 2upx;
 				}
@@ -494,15 +518,12 @@
 				color: $font-color-dark;
 			}
 			.price{
-				font-size: $font-lg;
-				color: $font-color-dark;
-				&:before{
-					content: '￥';
-					font-size: $font-sm;
-					margin: 0 2upx 0 8upx;
-				}
+				
+				color: $base-color;
+				
 			}
 		}
+		
 		.action-box{
 			display: flex;
 			justify-content: flex-end;

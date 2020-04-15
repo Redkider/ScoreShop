@@ -1,0 +1,46 @@
+{
+	"code":200,
+	"message":"ok",
+	"data":{
+		"point_config":{
+			"is_open":1
+		},
+		"is_logistics":1,
+		"address":{
+			"realname":"二狗",，
+			"phone":"15003232388",
+			"address_name":"",
+			"address_details":","
+		},
+		"company":[],
+		"pickup_point_config":{
+			"buyer_self_lifting":1,
+			"list":[
+				{"lable":""}
+			]
+		},
+		"products":[{
+			"name":"【低聚木糖】特惠装（1+5）盒",
+			"point_exchange_type":0,
+			"price":"1298.00",
+			"number":1,
+			"picture":"/static/productImg/preferential.jpg"
+		}],
+		"preview":{
+			"shipping_money":200,
+			"give_point":20,
+			"amountGoods":1298,
+			"discountAmount":20,
+			"point":100
+		},
+		"invoice":[
+			
+		],
+		"coupons":[
+			{"title":"","start_time":"","start_time":"","couponType":{
+				"type":""
+			},"money":200,"discount":100,"at_least":1000,"range_type":1,"max_fetch":1,"term_of_validity_type":1
+			}
+		]
+	}
+}

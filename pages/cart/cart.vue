@@ -21,7 +21,7 @@
     <view class="goods-list" v-else>
       <view class="row" v-for="(row,index) in cartList" :key="index">
         <!-- 删除按钮 -->
-        <view class="menu" @tap.stop="deleteCartItem(row.sku_id, 'one')">
+        <view class="menu" @tap.stop="deleteCartItem(row.id, 'one')">
           <i class="iconfont icon iconiconfontshanchu1"></i>
         </view>
         <!-- 商品 -->
@@ -41,9 +41,9 @@
             </view>
             <view class="info">
               <view class="title in2line">{{row.product_name}}</view>
-              <view class="spec" @tap.stop="toggleSpec(row)">{{row.sku_name || '基础版'}}</view>
+              <view class="spec" @tap.stop="toggleSpec(row)">{{row.sku_name || '无'}}</view>
               <view class="price-number">
-                <view class="price">{{row.sku && row.sku.price}}</view>
+                <view class="price">{{ row.price}}</view>
                 <view class="number">
                   <view class="sub" @tap.stop="sub(row, index)">
                     <i class="iconfont icon icon-jianhao"></i>
@@ -73,7 +73,7 @@
       <view class="delBtn" @tap="clearCart" v-if="selectedList.length>0">清空</view>
       <view class="settlement">
         <view class="sum">合计:
-          <view class="money">￥{{sumPrice}}</view>
+          <view class="money">{{sumPrice}}</view>
         </view>
         <view class="btn" @tap="createOrder">结算({{selectedList.length}})</view>
       </view>
@@ -92,7 +92,7 @@
           <image :src="showTypeImage || productDetail.picture"></image>
           <view class="right">
             <text class="title">{{ productDetail.name }}</text>
-            <text class="price">¥{{ currentSkuPrice || productDetail.minSkuPrice }}</text>
+            <text class="price">{{ currentSkuPrice || productDetail.minSkuPrice }}</text>
             <text class="stock">库存：{{ currentStock || productDetail.stock }}件</text>
             <view class="selected" v-if="specSelected.length > 0">
               已选：
@@ -850,10 +850,7 @@
               font-size: 28upx;
               height: 60upx;
               .price {
-                &:before{
-                  content: '￥';
-                  font-size: 26upx;
-                }
+               
               }
               .number {
                 display: flex;

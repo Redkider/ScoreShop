@@ -24,6 +24,13 @@ image,
 video {
   box-sizing: border-box;
 }
+@font-face {
+  font-family: 'FontAwesome';
+  src: url('./font-awesome/fonts/fontawesome-webfont.eot?v=4.7.0');
+  src: url('./font-awesome/fonts/fontawesome-webfont.eot?#iefix&v=4.7.0') format('embedded-opentype'), url('./font-awesome/fonts/fontawesome-webfont.woff2?v=4.7.0') format('woff2'), url('./font-awesome/fonts/fontawesome-webfont.woff?v=4.7.0') format('woff'), url('./font-awesome/fonts/fontawesome-webfont.ttf?v=4.7.0') format('truetype'), url('./font-awesome/fonts/fontawesome-webfont.svg?v=4.7.0#fontawesomeregular') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
 
 /* 骨架屏替代方案 */
 .Skeleton {
@@ -235,11 +242,16 @@ button[type=default] {
     font-size: $font-base;
     color: $uni-color-primary;
     line-height: 1;
-
+    font: normal normal normal 14px/1 FontAwesome;
     &:before {
-      content: '￥';
-      font-size: 26upx;
-    }
+		
+      
+	  
+     
+	  content: '\f1c0';
+	  padding: 4upx;
+	 
+    } 
 
     .m-price {
       margin-left: 4upx;

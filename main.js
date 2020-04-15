@@ -9,9 +9,15 @@ import "@/common/colorui/icon.css";
 import "@/common/colorui/animation.css";
 
 // 导入阿里巴巴矢量图标库
+import '@/common/css/font-awesome/css/font-awesome.css';
 import '@/common/css/iconfont/iconfont.css';
 import '@/common/css/reset.scss';
 import '@/common/css/uni.scss';
+// 导入awesome矢量图标库
+
+//导入日期过滤
+import getDate from '@/common/getdate.js'
+
 
 // 全局组件
 import rfImage from '@/components/rf-image/rf-image';

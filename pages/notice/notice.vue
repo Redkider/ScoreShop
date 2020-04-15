@@ -55,7 +55,7 @@
 			},
 			// 获取通知列表
 			async getNotifyAnnounceIndex() {
-				await this.$get(`${notifyAnnounceIndex}`, {}).then(r => {
+				await this.$get('http://localhost:8080/static/api/notifyAnnounceIndex.json', {}).then(r => {
 			    this.loading = false;
 					this.announceList = r.data
 				}).catch(() => {

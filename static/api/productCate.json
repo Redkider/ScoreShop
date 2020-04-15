@@ -3,26 +3,15 @@
 "code":200,
 "message":"ok",
 "data":[
-	{"id":"46","merchant_id":"1","title":"新品上市","cover":"","sort":"1","level":"1","pid":"0","tree":"tr_0 ","index_block_status":"1","status":"1","created_at":"1575895971","updated_at":"1585745600",
-		       "child":[
-		       	     {"id":"110","merchant_id":"1","title":"","cover":"http://demo2.rageframe.com/attachment/images/2020/03/15/image_158428123854521024.jpg","sort":"0","level":"2","pid":"115","tree":"tr_0 tr_115 ","index_block_status":"1","status":"1","created_at":"1584281262","updated_at":"1585316296",
-		       	         "child":[
-		       	            {"id":"63","merchant_id":"1","title":"【低聚木糖】特惠装（1+5）盒","cover":"/static/productImg/preferential.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897489","updated_at":"1577170136","child":[]},
-		       	            {"id":"64","merchant_id":"1","title":"【低聚木糖】精品装（1+5）盒","cover":"/static/productImg/highquality.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897481","updated_at":"1577170127","child":[]},
-		       	            {"id":"65","merchant_id":"1","title":"【低聚木糖】家庭装（1+5）盒","cover":"/static/productImg/family.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897445","updated_at":"1577170114","child":[]},
-		       	            {"id":"66","merchant_id":"1","title":"【低聚木糖】尊贵装（1+5）盒","cover":"/static/productImg/honorable.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897445","updated_at":"1577170114","child":[]}
-		       	          ]
-		                 }
-		       	 ]
-		},
-	    {"id":"47","merchant_id":"1","title":"推荐商品","cover":"http://demo2.rageframe.com/attachment/images/2020/03/15/image_158428117252531024.jpg","sort":"2","level":"1","pid":"0","tree":"tr_0 ","index_block_status":"1","status":"1","created_at":"1584281177","updated_at":"1585432598",
+	
+	    {"id":"47","merchant_id":"1","title":"消费专区","cover":"http://demo2.rageframe.com/attachment/images/2020/03/15/image_158428117252531024.jpg","sort":"2","level":"1","pid":"0","tree":"tr_0 ","index_block_status":"1","status":"1","created_at":"1584281177","updated_at":"1585432598",
 				"child":[
 					     {"id":"111","merchant_id":"1","title":"","cover":"http://demo2.rageframe.com/attachment/images/2020/03/15/image_158428123854521024.jpg","sort":"0","level":"2","pid":"115","tree":"tr_0 tr_115 ","index_block_status":"1","status":"1","created_at":"1584281262","updated_at":"1585316296",
 					         "child":[
-					            {"id":"63","merchant_id":"1","title":"【低聚木糖】特惠装（1+5）盒","cover":"/static/productImg/preferential.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897489","updated_at":"1577170136","child":[]},
-					            {"id":"64","merchant_id":"1","title":"【低聚木糖】精品装（1+5）盒","cover":"/static/productImg/highquality.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897481","updated_at":"1577170127","child":[]},
-					            {"id":"65","merchant_id":"1","title":"【低聚木糖】家庭装（1+5）盒","cover":"/static/productImg/family.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897445","updated_at":"1577170114","child":[]},
-					            {"id":"66","merchant_id":"1","title":"【低聚木糖】尊贵装（1+5）盒","cover":"/static/productImg/honorable.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897445","updated_at":"1577170114","child":[]}
+					            {"id":"63","merchant_id":"1","title":"【低聚木糖】特惠装（1+5）盒","cover":"/static/productImg/preferential.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897489","updated_at":"1577170136","price":"1298.00","sales":1321,"child":[]},
+					            {"id":"64","merchant_id":"1","title":"【低聚木糖】精品装（1+5）盒","cover":"/static/productImg/highquality.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897481","updated_at":"1577170127","price":"2596.00","sales":1231,"child":[]},
+					            {"id":"65","merchant_id":"1","title":"【低聚木糖】家庭装（1+5）盒","cover":"/static/productImg/family.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897445","updated_at":"1577170114","price":"3894.00","sales":23211,"child":[]},
+					            {"id":"66","merchant_id":"1","title":"【低聚木糖】尊贵装（1+5）盒","cover":"/static/productImg/honorable.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897445","updated_at":"1577170114","price":"6490.00","sales":221,"child":[]}
 					          ]
 				          }
 					 ]
@@ -32,10 +21,10 @@
 	        "child":[
 				     {"id":"112","merchant_id":"1","title":"","cover":"http://demo2.rageframe.com/attachment/images/2020/03/15/image_158428123854521024.jpg","sort":"0","level":"2","pid":"115","tree":"tr_0 tr_115 ","index_block_status":"1","status":"1","created_at":"1584281262","updated_at":"1585316296",
 				         "child":[
-				            {"id":"63","merchant_id":"1","title":"【低聚木糖】特惠装（1+5）盒","cover":"/static/productImg/preferential.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897489","updated_at":"1577170136","child":[]},
-				            {"id":"64","merchant_id":"1","title":"【低聚木糖】精品装（1+5）盒","cover":"/static/productImg/highquality.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897481","updated_at":"1577170127","child":[]},
-				            {"id":"65","merchant_id":"1","title":"【低聚木糖】家庭装（1+5）盒","cover":"/static/productImg/family.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897445","updated_at":"1577170114","child":[]},
-				            {"id":"66","merchant_id":"1","title":"【低聚木糖】尊贵装（1+5）盒","cover":"/static/productImg/honorable.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897445","updated_at":"1577170114","child":[]}
+				            {"id":"63","merchant_id":"1","title":"【低聚木糖】特惠装（1+5）盒","cover":"/static/productImg/preferential.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897489","updated_at":"1577170136","price":"1298.00","sales":561,"child":[]},
+				            {"id":"64","merchant_id":"1","title":"【低聚木糖】精品装（1+5）盒","cover":"/static/productImg/highquality.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897481","updated_at":"1577170127","price":"2596.00","sales":6521,"child":[]},
+				            {"id":"65","merchant_id":"1","title":"【低聚木糖】家庭装（1+5）盒","cover":"/static/productImg/family.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897445","updated_at":"1577170114","price":"3894.00","sales":4621,"child":[]},
+				            {"id":"66","merchant_id":"1","title":"【低聚木糖】尊贵装（1+5）盒","cover":"/static/productImg/honorable.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897445","updated_at":"1577170114","price":"6490.00","sales":1311,"child":[]}
 				          ]
 			          }
 				 ]
@@ -44,16 +33,16 @@
 			 "child":[
 				  {"id":"117","merchant_id":"1","title":"满20次复购","cover":"http://demo2.rageframe.com/attachment/images/2020/03/15/image_158428123854521024.jpg","sort":"0","level":"2","pid":"115","tree":"tr_0 tr_115 ","index_block_status":"1","status":"1","created_at":"1584281262","updated_at":"1585316296",
 					   "child":[
-							   {"id":"63","merchant_id":"1","title":"【低聚木糖】特惠装（1+5）盒","cover":"/static/productImg/preferential.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897489","updated_at":"1577170136","child":[]},
-							   {"id":"64","merchant_id":"1","title":"【低聚木糖】精品装（1+5）盒","cover":"/static/productImg/highquality.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897481","updated_at":"1577170127","child":[]}
+							   {"id":"63","merchant_id":"1","title":"【低聚木糖】特惠装（1+5）盒","cover":"/static/productImg/preferential.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897489","updated_at":"1577170136","price":"1298.00","sales":12311,"child":[]},
+							   {"id":"64","merchant_id":"1","title":"【低聚木糖】精品装（1+5）盒","cover":"/static/productImg/highquality.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897481","updated_at":"1577170127","price":"2596.00","sales":11231,"child":[]}
 						
 							   ]
 				  },
 				  {"id":"116","merchant_id":"1","title":"满30次复购","cover":"http://demo2.rageframe.com/attachment/images/2020/03/15/image_158428123854521024.jpg","sort":"3","level":"2","pid":"115","tree":"tr_0 tr_115 ","index_block_status":"1","status":"1","created_at":"1584281241","updated_at":"1584501880",
 						"child":[
 								
-								{"id":"65","merchant_id":"1","title":"【低聚木糖】家庭装（1+5）盒","cover":"/static/productImg/family.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897445","updated_at":"1577170114","child":[]},
-								{"id":"66","merchant_id":"1","title":"【低聚木糖】尊贵装（1+5）盒","cover":"/static/productImg/honorable.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897445","updated_at":"1577170114","child":[]}
+								{"id":"65","merchant_id":"1","title":"【低聚木糖】家庭装（1+5）盒","cover":"/static/productImg/family.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897445","updated_at":"1577170114","price":"3894.00","sales":22211,"child":[]},
+								{"id":"66","merchant_id":"1","title":"【低聚木糖】尊贵装（1+5）盒","cover":"/static/productImg/honorable.jpg","sort":"0","level":"3","pid":"58","tree":"tr_0 tr_43 tr_58 ","index_block_status":"0","status":"1","created_at":"1575897445","updated_at":"1577170114","price":"6490.00","sales":121,"child":[]}
 				  
 				          ]
 	              }

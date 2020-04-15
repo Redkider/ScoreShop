@@ -7,7 +7,7 @@
 			<view class="content">
 				<view class="my">
 					我的账户余额：
-					<text class="balance">{{ userInfo.account && userInfo.account.user_money || '0' }}</text> 元
+					<text class="balance">{{ userInfo.remainingSum || '0' }}</text> 元
 				</view>
 			</view>
 		</view>
@@ -20,7 +20,7 @@
 					<view class="list">
 						<view class="box" v-for="(amount,index) in amountList" :key="index" @tap="select(amount)" :class="{'on':amount.price == inputAmount}">
 							<view class="real">{{amount.price}}元</view>
-							<text class="give">赠送 {{ amount.give_price }}元</text>
+							 <text class="give">赠送 {{ amount.give_price }}元</text> 
 						</view>
 					</view>
 					<view class="num">
@@ -30,7 +30,7 @@
 						<view class="input">
 							<input type="number" @input="handleInputAmountChange" v-model="inputAmount" />
 						</view>
-						<text class="give" v-if="inputAmountGive > 0">赠送 {{ inputAmountGive }}元</text>
+						<!-- <text class="give" v-if="inputAmountGive > 0">赠送 {{ inputAmountGive }}元</text> -->
 					</view>
 				</view>
 			</view>
@@ -92,7 +92,7 @@
 				inputAmount: 0,//金额
 				inputAmountGive: 0,//金额
 				amountList:[],//预设3个可选快捷金额
-				payType: 1,//支付类型
+				payType: 2,//支付类型
 				userInfo: {},
 				loading: false,
 				providerList: [],
@@ -214,12 +214,19 @@
 			// 充值成功后更新用户信息
       async getMemberInfo() {
 				 
-         this.$get(memberInfo).then(r => {
+         this.$get('http://localhost:8080/static/api/memberInfo.json').then(r => {
           uni.setStorage({
               key: 'userInfo',
               data: r.data
           })
           this.userInfo = r.data || undefined;
+		  uni.removeStorage({
+		  	key: 'userInfo'
+		  })
+		  uni.setStorage({
+		      key: 'userInfo',
+		      data: r.data
+		  })
         })
       },
 			toTipDetail() {
@@ -232,18 +239,20 @@
 			 *@date 2019/12/11 11:01:12
 			 */
 			async initData(options) {
-				this.code = options.code;
+				console.log(1)
+				//this.code = options.code;
 				this.userInfo = uni.getStorageSync('userInfo') || undefined;
-				await this.$get(`${rechargeConfigIndex}`).then(r => {
+				await this.$get('http://localhost:8080/static/amountList.json').then(r => {
 			    this.pageLoading = false;
 					this.amountList = r.data;
+					console.log(this.amountList)
 					this.inputAmount =  r.data[0] && r.data[0].price || 0.01;
 					this.inputAmountGive =  r.data[0] && r.data[0].give_price || 0;
 				}).catch(() => {
 			    this.pageLoading = false;
 				});
 				// #ifdef H5
-				if (this.isWechat() && !this.code) {
+				/* if (this.isWechat() && !this.code) {
 						const url = window.location.href;
 						window.location.href = `https://open.weixin.qq.com/connect/oauth2/authorize?
 						appid=${weixinAppId}&&
@@ -252,7 +261,7 @@
 						scope=snsapi_userinfo&
 						state=STATE#wechat_redirect`;
 						return;
-					}
+					} 
 				const jsApiList = JSON.stringify(['chooseWXPay']);
 				await this.$post(`${wechatConfig}`, {
 					url: rechargeUrl,
@@ -264,7 +273,7 @@
 					})
 				}).catch(err => {
 					console.log(err)
-				});
+				});*/
 				// #endif
 				// #ifdef APP-PLUS
 				uni.getProvider({

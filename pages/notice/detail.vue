@@ -51,7 +51,7 @@
 		methods: {
 			// 获取通知列表
 			async getNotifyAnnounceView(id) {
-				await this.$get(`${notifyAnnounceView}`, { id }).then(r => {
+				await this.$get('http://localhost:8080/static/api/notifyAnnounceView.json', { id }).then(r => {
 					this.loading = false;
 					this.announceDetail = r.data;
 					uni.setNavigationBarTitle({

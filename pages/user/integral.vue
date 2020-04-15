@@ -3,25 +3,25 @@
     <view class="header">
       <view class="title">当前积分</view>
       <text class="num">
-        {{ userInfo && userInfo.account && userInfo.account.user_integral || '0' }}
+        {{userInfo.exchangeScore || '0' }}
       </text>
       <view class="line" />
       <view class="nav">
         <view class="item">
           <text class="num">
-            {{ userInfo && userInfo.account && userInfo.account.accumulate_integral || '0' }}
+            {{ userInfo.aggregateScore || '0' }}
           </text>
           <text class="title">累计积分</text>
         </view>
         <view class="item">
           <text class="num">
-            {{ -(userInfo && userInfo.account && userInfo.account.consume_integral) || '0' }}
+            {{ userInfo.consumptionScore || '0' }}
           </text>
           <text class="title">累计消费</text>
         </view>
         <view class="item">
           <text class="num">
-            {{ userInfo && userInfo.frozen_integral && userInfo.account.frozen_integral || '0' }}
+            {{ userInfo.freezingScore || '0' }}
           </text>
           <text class="title">冻结积分</text>
         </view>
@@ -90,8 +90,8 @@ export default {
   data () {
     return {
       navList: [
-          {name: "分值明细" },
-          {name: "分值提升" }
+          {name: "积分明细" },
+          {name: "积分提升" }
       ],
       current: 0,
       integralList: [],
@@ -131,8 +131,9 @@ export default {
       this.getIntegralListList();
     },
     initData () {
-      this.token = uni.getStorageSync('accessToken') || undefined;
-      this.userInfo = uni.getStorageSync('userInfo') || undefined;
+	  this.userInfo = uni.getStorageSync('userInfo') || undefined;
+      this.token = this.userInfo.id
+     
       if (this.token) {
         this.getIntegralListList();
       }
@@ -140,7 +141,7 @@ export default {
     async getIntegralListList () {
         const params = {};
         params.page = this.page;
-        await this.$get(`${creditsLogList}`, {
+        await this.$get('http://http://localhost:8080/static/api/integralList.json', {
           ...params
         }).then(r=>{
           this.loading = false;

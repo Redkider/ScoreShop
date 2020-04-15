@@ -43,7 +43,7 @@
           class="category"
           v-for="(item, index) in productCateList"
           :key="index"
-          @tap.stop="navToList(item.id)"
+          @tap.stop="navToList(item.url)"
       >
         <view class="img">
           <image :src="item.cover" mode="aspectFill"></image>
@@ -58,18 +58,11 @@
         <image class="swiper-slide-image" src="/static/news.png"></image>
       </view>
     </rf-swiper-slide>
-    <!--新品上市-->
-    <rf-floor-index
-        :list="newProductList"
-        @toBanner="indexTopToDetailPage"
-        @toList="toProductList({is_new: 1})"
-        :header="{title: '新品上市', desc: 'New Products Listed'}"
-        @detail="navToDetailPage"
-        :banner="carouselList.index_new && carouselList.index_new[0]"/>
+    
     <!--推荐商品-->
     <rf-floor-index
         :list="recommendProductList"
-        :header="{title: '推荐商品', desc: 'Recommend Product'}"
+        :header="{title: '消费专区', desc: 'Recommend Product'}"
         @toBanner="indexTopToDetailPage"
         @toList="toProductList({is_recommend: 1})"
         @detail="navToDetailPage"
@@ -185,6 +178,7 @@
 		onPullDownRefresh() {
 			this.getIndexList('refresh');
 		},
+		
 		methods: {
 			// 监听切换商户
 			bindPickerChange(e) {
@@ -209,10 +203,28 @@
 				this.getIndexList();
 			},
 			// 跳转至商品分类列表(分类id)
-			navToList(id) {
-				uni.navigateTo({
-					url: `/pages/product/list?cate_id=${id}`
-				})
+			navToList(url) {
+				
+				if(url=='/pages/order/hangSell'){
+					this.userInfo=uni.getStorageSync('userInfo')
+					this.token=this.userInfo.id
+					if(this.token){
+						uni.navigateTo({
+							url
+						})
+					}else{
+						this.$api.msg("登录之后才可以进入该版块！")
+					}
+					
+					
+				}else if(url=='/pages/category/category'){
+					
+					uni.switchTab({
+					    url
+					});
+				}else{
+					this.$api.msg("版块正在建设中...")
+				}
 			},
 			// 跳至广告图指定页面
 			indexTopToDetailPage(data, link) {

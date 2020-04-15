@@ -22,7 +22,7 @@
 					该商品仅需 <text class="price">{{ productDetail.point_exchange }} 积分</text>
 				</view>
 				<view class="price-box" v-else>
-					<text class="price-tip">¥</text>
+					<text class="price-tip"></text>
 					<text class="price">{{ currentSkuPrice || productDetail.price }}</text>
 					<text class="m-price" v-if="parseFloat(productDetail.market_price) > parseFloat(productDetail.price)">{{ productDetail.market_price }}</text>
 					<text class="coupon-tip" v-if="parseFloat(productDetail.market_price) > parseFloat(productDetail.price)">{{ (currentSkuPrice || productDetail.price) / productDetail.market_price | discountFilter }}折</text>
@@ -82,18 +82,12 @@
 					</view>
 				</view>
 				<!--购买类型-->
-				<view class="c-row b-b" @tap="toggleSpec">
+				<view class="c-row b-b" >
 					<text class="tit">购买类型</text>
 					<view class="con">
-						<text class="selected-text" v-for="(sItem, sIndex) in specSelected" :key="sIndex">
-							{{sItem.title}}
-						</text>
-						<text v-if="specSelected.length > 0"> * {{ cartCount }}</text>
-						<text class="selected-text" v-if="productDetail.base_attribute_format && productDetail.base_attribute_format.length === 0">
-							<!--{{ productDetail.name }} * 1-->
-							基础款 * {{ cartCount }}
-						</text>
-            <text class="selected-text" v-if="specSelected.length === 0">暂无购买类型</text>
+						<text class="selected-text"  v-if="productDetail.point_exchange_type"> {{ productDetail.point_exchange_type | pointExchangeTypeFilter }} </text>
+							
+						
 					</view>
 					<i class="iconfont iconyou" v-if="!productDetail"></i>
 				</view>
@@ -112,7 +106,7 @@
 				<view class="c-row b-b">
 					<text class="tit">积分活动</text>
 					<view class="con-list" v-if="productDetail.point_exchange_type">
-						<text v-if="productDetail.point_exchange_type">积分兑换类型: {{ productDetail.point_exchange_type | pointExchangeTypeFilter }} </text>
+						
 						<text v-if="productDetail.point_exchange_typ!= 3">积分赠送类型: {{ productDetail.integral_give_type | integralGiveTypeFilter }} </text>
 						<text v-if="productDetail.point_exchange_type!=3"> 可获得: {{ productDetail | givePointFilter }} 积分</text>
 						<text v-if="productDetail.point_exchange_type== 3">兑换所需积分: {{ productDetail.point_exchange }} </text>
@@ -202,7 +196,7 @@
 						</view>
 						<text class="con in2line">{{ productDetail.evaluate && productDetail.evaluate[0] && productDetail.evaluate[0].content || '这个人很懒，什么都没留下~' }}</text>
 						<view class="bot">
-							<text class="attr">购买类型：{{ productDetail.evaluate && productDetail.evaluate[0]  || '基础版' }}</text>
+							<text class="attr">购买类型：{{ productDetail.evaluate && productDetail.evaluate[0]  || '无' }}</text>
 							<text class="time">{{ productDetail.evaluate && productDetail.evaluate[0] && productDetail.evaluate[0].created_at | time }}</text>
 						</view>
 					</view>
@@ -235,7 +229,7 @@
 				<view class="action-btn-group">
 					<button type="primary" class="action-btn no-border buy-now-btn" :disabled="(currentStock || productDetail.stock) == 0" @tap="addCart('buy')">立即购买</button>
 					<button type="primary"
-									:disabled="productDetail.point_exchange_type == 2 || productDetail.point_exchange_type == 4 || (currentStock || productDetail.stock) == 0"
+								:disabled="cartbutton"
 									class=" action-btn no-border add-cart-btn"
 									@tap="addCart('cart')">加入购物车</button>
 				</view>
@@ -303,9 +297,9 @@
 						<image :src="showTypeImage || productDetail.picture"></image>
 						<view class="right">
 							<text class="title">{{ productDetail.name }}</text>
-							<text class="price">¥{{ currentSkuPrice || productDetail.minSkuPrice }}</text>
-							<text class="stock">库存：{{ currentStock || productDetail.stock }}件</text>
-							<view class="selected" v-if="specSelected.length > 0">
+							<text class="price">{{ productDetail.price }}</text>
+							<text class="stock">库存：{{ productDetail.stock }}件</text>
+							<!-- <view class="selected" v-if="specSelected.length > 0">
 								已选：
 								<text class="selected-text" v-for="(sItem, sIndex) in specSelected" :key="sIndex">
 									{{sItem.title}}
@@ -313,10 +307,10 @@
 								<text v-if="specSelected.length > 0">
 									 * {{ cartCount }}
 								</text>
-							</view>
+							</view> -->
 						</view>
 					</view>
-					<view v-for="(item,index) in specList" :key="index" class="attr-list">
+					<!-- <view v-for="(item,index) in specList" :key="index" class="attr-list">
 						<text>{{item.title}}</text>
 						<view class="item-list">
 							<view class="tit"
@@ -343,13 +337,13 @@
 								</view>
 							</view>
 						</view>
-					</view>
+					</view> -->
 					<view class="select-count">
 						<text>购买数量</text>
 						<uni-number-box
 							class="step"
 							:min="1"
-							:max="parseInt(currentStock || productDetail.stock, 10)"
+							:max="parseInt( productDetail.max_buy, 10)"
 							:value="cartCount"
 							@eventChange="numberChange"
 						></uni-number-box>
@@ -403,6 +397,7 @@
 	 * @date 2020-03-23 15:04
 	 * @copyright 2019
 	 */
+	import getweek from '@/common/getdate.js' //获取日期判断
 	import {mapMutations} from 'vuex';
 	
 	import share from '@/components/share';
@@ -458,10 +453,10 @@
 			    return val.toFixed(2) * 10;
 			},
 			maxBuyFilter(val) {
-				return parseInt(val, 10) === 0 ? '不限购' : `限购：${val}`;
+				return parseInt(val, 10) === 0 ? '不限购' : `每次限购：${val}`;
 			},
 			pointExchangeTypeFilter(val) {
-				const type = ['非积分兑换', '积分加现金', '直接购买', '只支持积分兑换'];
+				const type = [ '直接购买商品', '积分兑换商品'];
 				return type[parseInt(val, 10)];
 			},
 			integralGiveTypeFilter(val) {
@@ -489,7 +484,7 @@
 				specSelected:[],
 				favorite: false,
 				shareList: [],
-				currentStock: null,
+				cartbutton:0,
 				currentSkuPrice: null,
 				specList: [],
 				specChildList: [],
@@ -500,6 +495,12 @@
 				cartNum: null,
 				loading: true,
 				userInfo:{},
+				order_create_time:["2020-04-20"],//订单时间，判断今天是否购买
+				teamnumber:9,  //团队数
+				consumption:3,//消费次数
+				purchase:1,//复购次数
+				productarea_id:1,//商品所属区域（消费专区）
+				
         errorInfo: ''
 			};
 		},
@@ -637,6 +638,8 @@
 			 *@date 2019/11/18 15:48:21
 			 */
 			async initData(id) {
+			
+			 
 			  //this.token = uni.getStorageSync('accessToken');
 			   this.userInfo=uni.getStorageSync('userInfo');
 			    this.token=this.userInfo.id
@@ -670,16 +673,19 @@
 		  console.log(this.productDetail.evaluate)
 		   this.evaluateList =  this.productDetail.evaluate;
           this.favorite = this.productDetail.myCollect ? true : false;
-          this.specList = this.productDetail.base_attribute_format
+          this.specList = this.productDetail.base_attribute_format;
+		 
           this.specList.forEach(item => {
               this.specChildList = [...this.specChildList, ...item.value]
           });
+		  })
+		  },
           /**
            * 修复选择规格存储错误
            * 将这几行代码替换即可
            * 选择的规格存放在specSelected中
            */
-          this.specSelected = [];
+        /*  this.specSelected = [];
           r.data.base_attribute_format.forEach(item => {
               item.value[0].selected = true
               this.specSelected.push(item.value[0]);
@@ -699,7 +705,7 @@
 					this.loading = false;
 					this.errorInfo = err;
 				})
-			},
+			},*/
 			//规格弹窗开关
 			toggleSpec() {
 				if (!this.productDetail.id) return;
@@ -719,10 +725,10 @@
 	           });
 						return;
 					}
-          if (this.specSelected.length < this.productDetail.base_attribute_format.length){
+          /* if (this.specSelected.length < this.productDetail.base_attribute_format.length){
 				    this.$api.msg('请先选择规格');
             return;
-          }
+          } */
 					if (this.cartType === 'cart') {
 						this.cartType = null;
 						this.handleCartItemCreate();
@@ -743,7 +749,7 @@
 				setTimeout(() => {
 					this.specClass = 'none';
 				}, 250);
-			},
+			}, 
 			/**
 			 *@des 添加商品至购物车
 			 *@author stav stavyan@qq.com
@@ -751,45 +757,8 @@
 			 *@date 2019/11/18 17:45:54
 			 */
 			async handleCartItemCreate () {
-				// const type = parseInt(this.productDetail.point_exchange_type , 10)
-				// if ( type === 2 || type === 4) {
-				// 	uni.showToast({ title: "该商品不支持添加至购物车，请直接下单购买", icon: "none" });
-				// 	return;
-				// }
-				let sku_id;
-				let skuStr = null;
-				if (this.productDetail.sku.length === 1) {
-					sku_id = this.productDetail.sku[0].id
-				} else {
-					if (this.productDetail.base_attribute_format.length === 1) {
-						if (this.specSelected.length < 1) {
-							this.$api.msg('请先选择规格');
-							return;
-						} else {
-							skuStr = `${this.specSelected[0].base_spec_value_id}`
-						}
-					} else if (this.productDetail.base_attribute_format.length === 2) {
-						if (this.specSelected.length < 2) {
-							this.$api.msg('请先选择规格');
-							return;
-						} else {
-							skuStr = `${this.specSelected[0].base_spec_value_id}-${this.specSelected[1].base_spec_value_id}`
-						}
-					} else if (this.productDetail.base_attribute_format.length === 3) {
-						if (this.specSelected.length < 3) {
-							this.$api.msg('请先选择规格');
-							return;
-						} else {
-							skuStr = `${this.specSelected[0].base_spec_value_id}-${this.specSelected[1].base_spec_value_id}-${this.specSelected[2].base_spec_value_id}`
-						}
-					}
-					this.productDetail && this.productDetail.sku.forEach(item => {
-						if (item.data === skuStr) {
-							sku_id = item.id;
-							return;
-						}
-					})
-				}
+				
+				
 				await this.$get('http://localhost:8080/static/api/cartItemList.json', {
 					sku_id,
 					num: this.cartCount
@@ -830,48 +799,7 @@
 					console.log(err)
 				})*/
 			},
-			//选择规格
-			selectSpec(index, pid, type){
-				let list = this.specChildList;
-				list.forEach(item=>{
-					if(item.base_spec_id === pid){
-						this.$set(item, 'selected', false);
-					}
-				})
-				if (parseInt(type, 10) === 3) {
-					this.showTypeImage = list[index].data;
-				}
-				if (parseInt(type, 10) === 2) {
-					this.styleObject = {
-						color: list[index].data,
-						// border: `1px solid ${list[index].data}`,
-					};
-				}
-				this.$set(list[index], 'selected', true);
-				//存储已选择
-				/**
-				 * 修复选择规格存储错误
-				 * 将这几行代码替换即可
-				 * 选择的规格存放在specSelected中
-				 */
-				this.specSelected = [];
-				list.forEach(item=>{
-					if(item.selected === true){
-						this.specSelected.push(item);
-					}
-				})
-				let skuStr = []
-				this.specSelected.forEach(item => {
-					skuStr.push(item.base_spec_value_id)
-				})
-				this.productDetail.sku.forEach(item => {
-						if (item.data === skuStr.join('-')) {
-							this.currentStock = item.stock;
-              this.currentSkuPrice = item.price;
-							return;
-						}
-					})
-			},
+			
 			//分享
 			share(res){
 				// this.$refs.share.toggleMask();
@@ -899,7 +827,7 @@
                  if (confirmRes.confirm) {
                     uni.clearStorage();
                     uni.reLaunch({
-                        url: '/pages/public/logintype'
+                        url: '/pages/public/login'
                     });
                  }
              }
@@ -965,64 +893,114 @@
 				})
 			},
 			async buy() {
-				let sku_id;
-				let skuStr;
-				let sku_str;
-				if (this.productDetail.sku.length === 1) {
-					sku_id = this.productDetail.sku[0].id;
-				} else {
-					if (this.productDetail.base_attribute_format.length === 1) {
-						if (this.specSelected.length < 1) {
-							this.$api.msg('请先选择规格');
-							return;
-						} else {
-							skuStr = `${this.specSelected[0].base_spec_value_id}`;
-							sku_str = `${this.specSelected[0].title}`;
-						}
-					} else if (this.productDetail.base_attribute_format.length === 2) {
-						if (this.specSelected.length < 2) {
-							this.$api.msg('请先选择规格');
-							return;
-						} else {
-							skuStr = `${this.specSelected[0].base_spec_value_id}-${this.specSelected[1].base_spec_value_id}`
-							sku_str = `${this.specSelected[0].title} ${this.specSelected[1].title}`
-						}
-					} else if (this.productDetail.base_attribute_format.length === 3) {
-						if (this.specSelected.length < 3) {
-							this.$api.msg('请先选择规格');
-							return;
-						} else {
-							skuStr = `${this.specSelected[0].base_spec_value_id}-${this.specSelected[1].base_spec_value_id}-${this.specSelected[2].base_spec_value_id}`
-							sku_str = `${this.specSelected[0].title} ${this.specSelected[1].title} ${this.specSelected[2].title}`
-						}
+			    
+				
+					const list = {};
+					const data = {};
+					data.id = this.productDetail.id;               
+					data.num = this.cartCount;
+					if (this.productDetail.point_exchange_type == 0 || this.productDetail.point_exchange_type == 1) {
+						list.type = 'point_exchange';
+					} else {
+						list.type = 'buy_now';
 					}
-					this.productDetail && this.productDetail.sku.forEach(item => {
-						if (item.data === skuStr) {
-							sku_id = item.id;
-							return;
-						}
-					})
-				}
-				const list = {};
-				const data = {};
-				data.sku_id = sku_id;
-				data.num = this.cartCount;
-				if (this.productDetail.point_exchange_type == 2 || this.productDetail.point_exchange_type == 4) {
-					list.type = 'point_exchange';
-				} else {
-					list.type = 'buy_now';
-				}
-				list.data = JSON.stringify(data);
-				uni.navigateTo({
-					url: `/pages/order/createOrder?data=${JSON.stringify(list)}`
-				});
+					list.data = JSON.stringify(data);
+					
+					
+					getApp().globalData.data = list
+					uni.navigateTo({
+						url: `/pages/order/createOrder?data=${JSON.stringify(list)}`,
+						
+						
+					}); 
+					
+				
+				
+				
+				
 			},
 			addCart(type){
-				if (!this.productDetail.id) return;
-				this.specClass = 'show';
-				this.cartType = type
-			},
-			stopPrevent(){
+				
+				 
+				
+				if (type == 'cart' && this.productDetail.point_exchange_type == 0 || this.productDetail.point_exchange_type == 1) {
+				 	uni.showToast({ title: "该商品不支持添加至购物车，请立即购买", icon: "none" });
+					//this.cartbutton=1;
+				 	return;
+				 }else{
+					 if(this.userInfo.alipay=='' || this.userInfo.unionpay==''){
+					 	
+					 	uni.showModal({
+					 	    content: '支付宝，银行卡未绑定，是否去绑定',
+					 	    success: (e) => {
+					 	        if (e.confirm) {
+					 	           uni.navigateTo({
+					 	           	url: "/pages/public/binding",
+					 	           })
+					 	            }else{
+					 				this.$api.msg("支付宝，银行卡未绑定会影响您购买商品，建议立即绑定！")	
+					 				}
+					 				},
+					 				})
+					 }else{ 
+						 if(this.productarea_id==1){
+							 if (!this.productDetail.id) return;
+							 Date.prototype.format = function() {
+							  var s = '';
+							  var mouth = (this.getMonth() + 1)>=10?(this.getMonth() + 1):('0'+(this.getMonth() + 1));
+							 	var day = this.getDate()>=10?this.getDate():('0'+this.getDate());
+							 	s += this.getFullYear() + '-'; // 获取年份。
+							 	s += mouth + "-"; // 获取月份。
+							 	 s += day; // 获取日。
+							 	return (s); // 返回日期。
+							 	 };
+							 	var myDate = new Date();
+							 	var date=myDate.format().replace(/\s+/g,"");
+							 	console.log(date)	
+							 	//判断休息日	
+							 	var today1=getweek.some((item)=>{
+							 				return item==date
+							 			}) 
+										
+								if(today1){
+										//this.specClass = 'none';
+										this.$api.msg('休息日暂时不能选购商品！')
+											}else{
+												//判断当日是否购买过
+												var today2=this.order_create_time.some((item)=>{
+												return item==date
+												})
+													if(today2){
+															this.$api.msg('今日购买次数已达上限！')
+															}else{
+																if(this.userInfo.generalAssets>=1200 && this.teamnumber<10){
+																	this.$api.msg('您的团队未达到要求,暂时限制消费！')
+																	}else{
+																		
+																		this.purchase=(this.purchase==0) ? 1 :this.purchase;
+																		if(this.consumption+1 > this.purchase*3){
+																		      this.$api.msg('复购之后才可以消费')
+																			}else{
+																				
+																				this.specClass = 'show';
+																				this.cartType = type
+																			}
+																		
+																	}
+																
+																
+															}
+												
+											}		
+							}else{
+							 this.specClass = 'show';
+							 this.cartType = type
+						 }
+					 }   
+        }
+							  
+	},
+	stopPrevent(){
 			}
 		},
 	}

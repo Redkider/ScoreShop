@@ -23,6 +23,18 @@
         "navigationBarTitleText": "公告"
       }
     },
+	{
+	  "path": "pages/order/hangSell",
+	  "style": {
+	    "navigationBarTitleText": "挂售中心"
+	  }
+	},
+	{
+	  "path": "pages/public/binding",
+	  "style": {
+	    "navigationBarTitleText": "绑定支付宝银行卡"
+	  }
+	},
     {
       "path": "pages/notice/detail",
       "style": {
@@ -340,7 +352,7 @@
       "path": "pages/user/coupon",
       "style": {
         "enablePullDownRefresh": true,
-        "navigationBarTitleText": "我的优惠券",
+        "navigationBarTitleText": "我的红包",
         "app-plus": {
           "pullToRefresh": {
             "support": true,
@@ -362,6 +374,12 @@
         "navigationBarTitleText": "充值中心"
       }
     },
+	{
+	  "path": "pages/user/deposit",
+	  "style": {
+	    "navigationBarTitleText": "提现中心"
+	  }
+	},
     {
       "path": "pages/user/account",
       "style": {
@@ -382,6 +400,20 @@
         }
       }
     },
+	{
+	  "path": "pages/user/depositrecord",
+	  "style": {
+	    "enablePullDownRefresh": true,
+	    "navigationBarTitleText": "提现明细",
+	    "app-plus": {
+	      "pullToRefresh": {
+	        "support": true,
+	        "color": "#fa436a",
+	        "style": "default"
+	      }
+	    }
+	  }
+	},
     {
       "path": "pages/user/integral",
       "style": {
